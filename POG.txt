@@ -1,0 +1,237 @@
+2023-03-17 00:56:22,789 18568 3223813446.py[line:41] - INFO: FPR_curve,: [0.00000000e+00 2.75407673e-08 4.11459063e-05 ... 9.99975516e-01
+ 9.99975571e-01 1.00000000e+00],TPR_curve,:[0. 0. 0. ... 1. 1. 1.]
+2023-03-17 00:56:32,198 18568 3223813446.py[line:44] - INFO: Epoch mean loss: 12.85318299116188
+2023-03-17 00:56:41,589 18568 3223813446.py[line:45] - INFO: Confusion Matrix:[[13054514 23255295]
+ [      10      692]]
+2023-03-17 00:56:41,597 18568 3223813446.py[line:48] - INFO: FPR: 0.6404686678467518
+2023-03-17 00:56:41,601 18568 3223813446.py[line:49] - INFO: TPR: 0.9857549857549858
+0.6404686678467518 0.9857549857549858 0.9491789468933458
+2023-03-17 00:56:41,604 18568 3223813446.py[line:52] - INFO: test RR: 10.751541313743903
+2023-03-17 00:56:41,606 18568 3223813446.py[line:53] - INFO: test auc: 0.9491789468933458
+RR= 15
+red_links = test('test for old nodes',tgan,R,num_instance,te_src_l,te_dst_l,te_ts_l,te_label_l,center)
+rednodes_predict = set(red_links[0])|set(red_links[1])
+2023-03-17 00:57:23,087 18568 3223813446.py[line:2] - INFO: test for old nodes
+100%|████████████████████████████████████████████████████████████████████████████| 9078/9078 [1:43:14<00:00,  1.47it/s]
+2023-03-17 02:50:54,940 18568 3223813446.py[line:41] - INFO: FPR_curve,: [0.00000000e+00 2.75407673e-08 2.01047601e-05 ... 9.99977802e-01
+ 9.99977857e-01 1.00000000e+00],TPR_curve,:[0. 0. 0. ... 1. 1. 1.]
+2023-03-17 02:51:04,201 18568 3223813446.py[line:44] - INFO: Epoch mean loss: 12.853221860271269
+2023-03-17 02:51:12,888 18568 3223813446.py[line:45] - INFO: Confusion Matrix:[[27198587  9111222]
+ [      31      671]]
+2023-03-17 02:51:12,892 18568 3223813446.py[line:48] - INFO: FPR: 0.2509300448261791
+2023-03-17 02:51:12,894 18568 3223813446.py[line:49] - INFO: TPR: 0.9558404558404558
+0.2509300448261791 0.9558404558404558 0.9507119253977249
+2023-03-17 02:51:12,895 18568 3223813446.py[line:52] - INFO: test RR: 15
+2023-03-17 02:51:12,896 18568 3223813446.py[line:53] - INFO: test auc: 0.9507119253977249
+RR= 13
+red_links = test('test for old nodes',tgan,R,num_instance,te_src_l,te_dst_l,te_ts_l,te_label_l,center)
+rednodes_predict = set(red_links[0])|set(red_links[1])
+2023-03-17 02:51:58,403 18568 3223813446.py[line:2] - INFO: test for old nodes
+100%|████████████████████████████████████████████████████████████████████████████| 9078/9078 [1:38:50<00:00,  1.53it/s]
+2023-03-17 04:35:39,086 18568 3223813446.py[line:41] - INFO: FPR_curve,: [0.00000000e+00 2.75407673e-08 7.29830333e-06 ... 9.99993308e-01
+ 9.99993363e-01 1.00000000e+00],TPR_curve,:[0. 0. 0. ... 1. 1. 1.]
+2023-03-17 04:35:47,635 18568 3223813446.py[line:44] - INFO: Epoch mean loss: 12.853208017181158
+2023-03-17 04:35:56,773 18568 3223813446.py[line:45] - INFO: Confusion Matrix:[[20879369 15430440]
+ [      16      686]]
+2023-03-17 04:35:56,778 18568 3223813446.py[line:48] - INFO: FPR: 0.42496615721663533
+2023-03-17 04:35:56,783 18568 3223813446.py[line:49] - INFO: TPR: 0.9772079772079773
+0.42496615721663533 0.9772079772079773 0.9514335875787185
+2023-03-17 04:35:56,787 18568 3223813446.py[line:52] - INFO: test RR: 13
+2023-03-17 04:35:56,789 18568 3223813446.py[line:53] - INFO: test auc: 0.9514335875787185
+RR= 18
+red_links18 = test('test for old nodes',tgan,R,num_instance,te_src_l,te_dst_l,te_ts_l,te_label_l,center)
+rednodes_predict18 = set(red_links18[0])|set(red_links18[1])
+2023-03-17 08:50:51,827 18568 3223813446.py[line:2] - INFO: test for old nodes
+100%|██████████████████████████████████████████████████████████████████████████████| 1287/1287 [13:43<00:00,  1.56it/s]
+2023-03-17 09:04:53,091 18568 3223813446.py[line:41] - INFO: FPR_curve,: [0.00000000e+00 1.94321725e-07 2.72439058e-04 ... 9.99808593e-01
+ 9.99808982e-01 1.00000000e+00],TPR_curve,:[0. 0. 0. ... 1. 1. 1.]
+2023-03-17 09:04:54,024 18568 3223813446.py[line:44] - INFO: Epoch mean loss: 10.521986763886732
+2023-03-17 09:04:54,973 18568 3223813446.py[line:45] - INFO: Confusion Matrix:[[4956368  189737]
+ [     74     329]]
+2023-03-17 09:04:54,979 18568 3223813446.py[line:48] - INFO: FPR: 0.03687002111305541
+2023-03-17 09:04:54,981 18568 3223813446.py[line:49] - INFO: TPR: 0.8163771712158809
+0.03687002111305541 0.8163771712158809 0.963677138475563
+2023-03-17 09:04:54,984 18568 3223813446.py[line:52] - INFO: test RR: 18
+2023-03-17 09:04:54,986 18568 3223813446.py[line:53] - INFO: test auc: 0.963677138475563
+RR= 16
+red_links16 = test('test for old nodes',tgan,R,num_instance,te_src_l,te_dst_l,te_ts_l,te_label_l,center)
+rednodes_predict16 = set(red_links16[0])|set(red_links16[1])
+2023-03-17 09:23:12,823 18568 3223813446.py[line:2] - INFO: test for old nodes
+100%|██████████████████████████████████████████████████████████████████████████████| 1287/1287 [13:05<00:00,  1.64it/s]
+2023-03-17 09:36:33,849 18568 3223813446.py[line:41] - INFO: FPR_curve,: [0.00000000e+00 1.94321725e-07 2.40375974e-04 ... 9.99789161e-01
+ 9.99789550e-01 1.00000000e+00],TPR_curve,:[0. 0. 0. ... 1. 1. 1.]
+2023-03-17 09:36:34,936 18568 3223813446.py[line:44] - INFO: Epoch mean loss: 10.521556372964854
+2023-03-17 09:36:35,830 18568 3223813446.py[line:45] - INFO: Confusion Matrix:[[4751082  395023]
+ [     37     366]]
+2023-03-17 09:36:35,833 18568 3223813446.py[line:48] - INFO: FPR: 0.07676155072622887
+2023-03-17 09:36:35,836 18568 3223813446.py[line:49] - INFO: TPR: 0.9081885856079405
+0.07676155072622887 0.9081885856079405 0.9633465817915343
+2023-03-17 09:36:35,837 18568 3223813446.py[line:52] - INFO: test RR: 16
+2023-03-17 09:36:35,839 18568 3223813446.py[line:53] - INFO: test auc: 0.9633465817915343
+
+
+
+
+SEED = 1
+ADGAT_EPOCHS = 18
+BATCH_SIZE = 8000
+NUM_LAYER = 1
+UNIFORM = True
+GPU = 1
+NUM_NEIGHBORS = 90
+NUM_HEADS = 16
+DROP_OUT = 0.1
+input_feat = 128
+output_feat = 128
+hidden = 128
+USE_TIME = 'time'
+AGG_METHOD = 'attn'
+ATTN_MODE = 'prod'
+objective = 'soft-boundary' #'hard'
+SEQ_LEN = NUM_NEIGHBORS
+LEARNING_RATE = 1e-4
+DATA = 'auth'
+c = None
+R=0
+RR = 0#阈值，判断当前点在球体外
+att_feat = 4
+warm_up_n_epochs = 5
+nu=1e-5
+2023-03-19 15:00:36,614 10104 1697537018.py[line:2] - INFO: test for old nodes
+100%|████████████████████████████████████████████████████████████████████████████| 3951/3951 [1:18:16<00:00,  1.19s/it]
+2023-03-19 16:29:29,495 10104 1697537018.py[line:41] - INFO: FPR_curve,: [0.00000000e+00 2.75407673e-08 3.75380658e-05 ... 9.99975489e-01
+ 9.99975544e-01 1.00000000e+00],TPR_curve,:[0. 0. 0. ... 1. 1. 1.]
+2023-03-19 16:29:37,548 10104 1697537018.py[line:44] - INFO: Epoch mean loss: 13.644097539268847
+2023-03-19 16:29:45,879 10104 1697537018.py[line:45] - INFO: Confusion Matrix:[[34124126  2185683]
+ [      79      623]]
+2023-03-19 16:29:45,882 10104 1697537018.py[line:48] - INFO: FPR: 0.06019538687190561
+2023-03-19 16:29:45,883 10104 1697537018.py[line:49] - INFO: TPR: 0.8874643874643875
+0.06019538687190561 0.8874643874643875 0.9558822968176893
+2023-03-19 16:29:45,886 10104 1697537018.py[line:52] - INFO: test RR: 20
+2023-03-19 16:29:45,888 10104 1697537018.py[line:53] - INFO: test auc: 0.9558822968176893
+
+
+
+
+
+
+
+
+
+D:\user\hxr\software\anaconda\envs\tensorflow\python.exe D:\user\hxr\experiment\LANLexperiment\PICHACHU\Pikachu-master\main.py --train True 
+... Parsing Data ... 
+
+... Generating Node Map ... 
+
+163371it [00:08, 18780.03it/s]
+... Generating Graphs ... 
+
+100%|██████████| 348/348 [59:29<00:00, 10.26s/it]
+
+Total Graphs:  348
+12945
+
+Total Nodes:  15343
+... Starting Graph Embedding ... 
+
+ 
+********** PARAM **********
+ Namespace(alpha=0.001, dataset='lanl', dimensions=16, epoch=10, input='D:/user/hxr/experiment/LANLexperiment/PICHACHU/Pikachu-master/dataset/lanl/POG.csv', iter=10, numwalk=1, output='D:/user/hxr/experiment/LANLexperiment/PICHACHU/Pikachu-master/results/POGanomalous_edges.csv', support=8, train=True, trainwin=5, walklen=20)
+Weight Files:  _lanl_aig_d16.pickle
+********************
+
+llllllllllllllllllllllllllllllllllllllllllllllllll 348
+
+Generating Short Term embedding...
+
+Number of CPU Available:  4
+
+Short Term embedding Completed...   [126564.1779297 Sec.]
+
+
+Starting Long Term Embedding...
+2023-03-19 03:04:16.186078: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Model: "functional_1"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         [(None, 348, 16)]         0         
+_________________________________________________________________
+masking (Masking)            (None, 348, 16)           0         
+_________________________________________________________________
+gru (GRU)                    (None, 348, 16)           1632      
+_________________________________________________________________
+dropout (Dropout)            (None, 348, 16)           0         
+_________________________________________________________________
+gru_1 (GRU)                  (None, 32)                4800      
+_________________________________________________________________
+repeat_vector (RepeatVector) (None, 348, 32)           0         
+_________________________________________________________________
+gru_2 (GRU)                  (None, 348, 32)           6336      
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 348, 32)           0         
+_________________________________________________________________
+gru_3 (GRU)                  (None, 348, 16)           2400      
+_________________________________________________________________
+time_distributed (TimeDistri (None, 348, 16)           272       
+=================================================================
+Total params: 15,440
+Trainable params: 15,440
+Non-trainable params: 0
+_________________________________________________________________
+None
+
+
+Training Long Term Model...
+Epoch 1/10
+432/432 [==============================] - 1517s 4s/step - loss: 0.0179 - val_loss: 0.0015
+Epoch 2/10
+432/432 [==============================] - 1388s 3s/step - loss: 0.0161 - val_loss: 0.0016
+Epoch 3/10
+432/432 [==============================] - 1386s 3s/step - loss: 0.0154 - val_loss: 0.0017
+Epoch 4/10
+432/432 [==============================] - 1343s 3s/step - loss: 0.0149 - val_loss: 0.0020
+Epoch 5/10
+432/432 [==============================] - 1323s 3s/step - loss: 0.0150 - val_loss: 0.0014
+Epoch 6/10
+432/432 [==============================] - 1342s 3s/step - loss: 0.0143 - val_loss: 0.0015
+Epoch 7/10
+432/432 [==============================] - 1331s 3s/step - loss: 0.0145 - val_loss: 0.0015
+Epoch 8/10
+432/432 [==============================] - 1327s 3s/step - loss: 0.0143 - val_loss: 0.0014
+Epoch 9/10
+432/432 [==============================] - 1296s 3s/step - loss: 0.0140 - val_loss: 0.0013
+Epoch 10/10
+432/432 [==============================] - 1289s 3s/step - loss: 0.0137 - val_loss: 0.0012
+
+Long Term Embedding Completed...   [13714.498719799987 Sec.]
+
+
+ =====   Anomaly Detection ===== 
+
+
+Estimating Edge Probability Distribution....
+++++++++++ Parameters +++++++ 
+Learning Rate:  0.001
+# of Support Set:  10
+Param File:  D:/user/hxr/experiment/LANLexperiment/PICHACHU/Pikachu-master/weights/param_lanl_aig_d16_0.001_10.pickle
+
+
+Generating Training Edges....
+  0%|          | 0/5 [00:00<?, ?it/s]G:  1452 12945
+ 20%|██        | 1/5 [00:03<00:12,  3.16s/it]G:  4314 36011
+ 40%|████      | 2/5 [00:20<00:34, 11.60s/it]G:  6702 97693
+ 60%|██████    | 3/5 [01:04<00:52, 26.34s/it]G:  6382 84846
+ 80%|████████  | 4/5 [01:57<00:36, 36.79s/it]G:  5281 38438
+100%|██████████| 5/5 [02:25<00:00, 29.17s/it]
+Traceback (most recent call last):
+  File "D:\user\hxr\experiment\LANLexperiment\PICHACHU\Pikachu-master\main.py", line 120, in <module>
+    ad_long_term.anomaly_detection(graphs, param_file=zjspath+'weights/param' + param_file_name)
+  File "D:\user\hxr\experiment\LANLexperiment\PICHACHU\Pikachu-master\anomaly_detection.py", line 181, in anomaly_detection
+    train_x, train_y = self.get_train_edges(graphs[:self.args.trainwin], self.args.support)
+  File "D:\user\hxr\experiment\LANLexperiment\PICHACHU\Pikachu-master\anomaly_detection.py", line 121, in get_train_edges
+    return np.array(data_x), np.array(data_y)
+numpy.core._exceptions.MemoryError: Unable to allocate 16.3 GiB for an array with shape (142218, 15343) and data type float64
+
+Process finished with exit code 1
