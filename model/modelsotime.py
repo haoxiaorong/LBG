@@ -8,7 +8,6 @@ import math
 EPS = 1e-15
 objective='soft-boundary'
 from torch import Tensor
-from numba import jit
 
 
 
@@ -49,7 +48,6 @@ class ScaledDotProductAttention(torch.nn.Module):
 
         output = torch.bmm(attn, v)
 
-
         return output, attn
 
 
@@ -62,11 +60,10 @@ class MeanPool(torch.nn.Module):
         self.merger = MergeLayer(edge_dim + feat_dim, feat_dim, feat_dim)
 
     def forward(self, src, src_t, seq, seq_t, seq_e, mask):
-        # seq [B, N, D]
-        # mask [B, N]
+
         src_x = src
-        seq_x = torch.cat([seq, seq_e], dim=2)  # [B, N, De + D]
-        hn = seq_x.mean(dim=1)  # [B, De + D]
+        seq_x = torch.cat([seq, seq_e], dim=2)
+        hn = seq_x.mean(dim=1)
         output = self.merger(hn, src_x)
         return output, None
 
@@ -113,16 +110,15 @@ class MultiHeadAttention(nn.Module):
         k = k.permute(2, 0, 1, 3).contiguous().view(-1, len_k, d_k)
         v = v.permute(2, 0, 1, 3).contiguous().view(-1, len_v, d_v)
 
-        mask = mask.repeat(n_head, 1, 1)
+        mask = mask.repeat(n_head, 1, 1)  # (n*b) x .. x ..
         output, attn = self.attention(q, k, v, mask=mask)
 
         output = output.view(n_head, sz_b, len_q, d_v)
 
-        output = output.permute(1, 2, 0, 3).contiguous().view(sz_b, len_q, -1)
+        output = output.permute(1, 2, 0, 3).contiguous().view(sz_b, len_q, -1)  # b x lq x (n*dv)
 
         output = self.dropout(self.fc(output))
         output = self.layer_norm(output + residual)
-        # output = self.layer_norm(output)#改动
 
         return output, attn
 
@@ -159,16 +155,13 @@ class MapBasedMultiHeadAttention(nn.Module):
         d_k, d_v, n_head = self.d_k, self.d_v, self.n_head
 
         sz_b, len_q, _ = q.size()
-
         sz_b, len_k, _ = k.size()
         sz_b, len_v, _ = v.size()
 
         residual = q
 
         q = self.wq_node_transform(q).view(sz_b, len_q, n_head, d_k)
-
         k = self.wk_node_transform(k).view(sz_b, len_k, n_head, d_k)
-
         v = self.wv_node_transform(v).view(sz_b, len_v, n_head, d_v)
 
         q = q.permute(2, 0, 1, 3).contiguous().view(-1, len_q, d_k)
@@ -219,11 +212,11 @@ class TimeEncode(torch.nn.Module):
         batch_size = ts.size(0)
         seq_len = ts.size(1)
 
-        ts = ts.view(batch_size, seq_len, 1)  # [N, L, 1]
-        map_ts = ts * self.basis_freq.view(1, 1, -1)  # [N, L, time_dim]
+        ts = ts.view(batch_size, seq_len, 1)
+        map_ts = ts * self.basis_freq.view(1, 1, -1)
         map_ts += self.phase.view(1, 1, -1)
 
-        harmonic = torch.cos(map_ts)#
+        harmonic = torch.cos(map_ts)
 
         return harmonic  # self.dense(harmonic)
 
@@ -249,11 +242,10 @@ class AttnModel(torch.nn.Module):
         self.time_dim = time_dim
         self.logger = logging.getLogger(__name__)
 
-        self.edge_in_dim = (feat_dim + time_dim)
+        self.edge_in_dim = feat_dim
         self.model_dim = self.edge_in_dim
-        self.merger = MergeLayer(self.model_dim, 2*feat_dim, feat_dim)
+        self.merger = MergeLayer(self.model_dim, feat_dim, feat_dim)
 
-        # self.act = torch.nn.ReLU()
         self.line = torch.nn.Linear(self.model_dim, feat_dim,bias = False)
         assert (self.model_dim % n_head == 0)
         self.attn_mode = attn_mode
@@ -294,33 +286,32 @@ class AttnModel(torch.nn.Module):
           weight: float Tensor of shape [B, N]
         """
 
-        src_ext = torch.unsqueeze(src, dim=1)  # src [B, 1, D]
-        q = torch.cat([src_ext, src_t], dim=2)
-        k = torch.cat([seq, seq_t], dim=2)
+        src_ext = torch.unsqueeze(src, dim=1)  # src
+        q = src_ext
+        k = seq
 
-        mask = torch.unsqueeze(mask, dim=2)  # mask [B, N, 1]
-        mask = mask.permute([0, 2, 1])  # mask [B, 1, N]
+        mask = torch.unsqueeze(mask, dim=2)
+        mask = mask.permute([0, 2, 1])
 
-
-        output, attn = self.multi_head_target(q=q, k=k, v=k, mask=mask)
+        # target-attention
+        output, attn = self.multi_head_target(q=q, k=k, v=k, mask=mask)  # output: [B, 1, D + Dt], attn: [B, 1, N]
         output = output.squeeze()
         attn = attn.squeeze()
         
-        src_t = q.squeeze()
-        output = self.merger(output, src_t)
+        output = self.merger(output, q.squeeze())
         return output, attn
 
-class LBG(torch.nn.Module):
+class TGAN(torch.nn.Module):
+
     def __init__(self, ngh_finder, n_feat, num_layers=3, use_time='time', agg_method='attn',
                  attn_mode='prod', seq_len=None, n_head=4, drop_out=0.1, node_dim=None, time_dim=None):
-        super(LBG, self).__init__()
+        super(TGAN, self).__init__()
 
         self.num_layers = num_layers
         self.ngh_finder = ngh_finder
         self.tune_times = 5
         self.n_feat_th = torch.nn.Parameter(torch.from_numpy(n_feat.astype(np.float32)))
         self.node_raw_embed = torch.nn.Embedding.from_pretrained(self.n_feat_th, padding_idx=0, freeze=True)
-
 
         self.feat_dim = self.n_feat_th.shape[1]
         self.logger = logging.getLogger(__name__)
@@ -384,7 +375,7 @@ class LBG(torch.nn.Module):
         linka = torch.cat([srca_embed, targeta_embed], dim=1)
         linkb = torch.cat([srcb_embed, targetb_embed], dim=1)
 
-        score = torch.mean(linka, dim=1)
+        score = torch.mean(linka,dim=1)
         loss = self._loss_bt(z_a=linka, z_b=linkb)
         return score, loss
 
@@ -400,10 +391,9 @@ class LBG(torch.nn.Module):
         cut_time_l_th = torch.from_numpy(cut_time_l).float().to(device)
 
         cut_time_l_th = torch.unsqueeze(cut_time_l_th, dim=1)
-        src_node_t_embed = self.time_encoder((cut_time_l_th))
+        src_node_t_embed = None
 
         src_node_feat = self.node_raw_embed(src_node_batch_th)
-
 
         if curr_layers == 0:
             return src_node_feat
@@ -420,9 +410,6 @@ class LBG(torch.nn.Module):
 
             src_ngh_node_batch_th = torch.from_numpy(src_ngh_node_batch).long().to(device)
 
-            src_ngh_t_batch_delta = cut_time_l[:, np.newaxis] - src_ngh_t_batch
-            src_ngh_t_batch_th = torch.from_numpy(src_ngh_t_batch_delta).float().to(device)
-
             # get previous layer's node features
             src_ngh_node_batch_flat = src_ngh_node_batch.flatten()  # reshape(batch_size, -1)
             src_ngh_t_batch_flat = src_ngh_t_batch.flatten()  # reshape(batch_size, -1)
@@ -433,8 +420,7 @@ class LBG(torch.nn.Module):
             src_ngh_feat = src_ngh_node_conv_feat.view(batch_size, num_neighbors, -1)
 
             # get edge time features and node features
-            src_ngh_t_embed = self.time_encoder(src_ngh_t_batch_th)
-            # src_ngn_edge_feat = self.edge_raw_embed(src_ngh_eidx_batch)
+            src_ngh_t_embed = None
 
             # attention aggregation
             mask = src_ngh_node_batch_th == 0
@@ -475,6 +461,7 @@ def augment_g(edge_index: Tensor, p_e: float):
 
 def bernoulli_mask(size: Union[int, Tuple[int, ...]], prob: float):
     return np.random.binomial(1, prob, size)
+    # return torch.bernoulli((1 - prob) * torch.ones(size))
 
 def _cross_correlation_matrix(
     z_a: Tensor, z_b: Tensor,
@@ -508,7 +495,6 @@ def barlow_twins_loss(
     )
 
     return loss
-
 def Deep_SVDD(output, R, c, nu, objective='hard_boundary'):
     dist = torch.sum((output-c) ** 2, dim=1)
     if objective == 'soft-boundary':

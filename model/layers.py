@@ -71,12 +71,11 @@ class MergeLayer(torch.nn.Module):
         super().__init__()
         self.layer_norm = torch.nn.LayerNorm(dim1 + dim2)
         self.fc1 = torch.nn.Linear(dim1 + dim2, dim3,bias=True)
-        self.act = torch.nn.LeakyReLU()#SELU(.1696,.6558),Tanh(0.1600,0.5540)leakyrelu,RReLU\LeakyReLU\ELU\RELU\Softplus\logsoftmax(0.1614,0.6241)
-
+        self.act = torch.nn.LeakyReLU()
         torch.nn.init.xavier_normal_(self.fc1.weight)
 
     def forward(self, x1, x2):
         x = torch.cat([x1, x2], dim=-1)
         x = self.layer_norm(x)
         h = self.act(self.fc1(x))
-        return h #改动
+        return h

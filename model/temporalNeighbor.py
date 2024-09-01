@@ -69,9 +69,6 @@ class temporalNeighbor:
         if len(neighbors_idx) == 0 or len(neighbors_ts) == 0:
             return neighbors_idx, neighbors_ts, neighbors_e_idx
 
-        #index = np.where(neighbors_ts<=cut_time)
-
-        #return neighbors_idx[index], neighbors_e_idx[index], neighbors_ts[index]
 
         left = 0
         right = len(neighbors_idx) - 1
