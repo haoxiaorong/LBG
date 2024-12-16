@@ -1,4 +1,4 @@
-# Detecting Lateral Movement through Graph Analysis with Inter-behavior Intervals Embedding
+# Using Graph with Inter-connection Intervals Embedding to Discover Potential Threats in the Network
 ![framework](model/framework.png)
 
 
